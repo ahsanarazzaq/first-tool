@@ -145,3 +145,11 @@ btnClear.addEventListener('click', clearText);
 
 // Initial count update
 updateCounts();
+
+// Navigation link active state update
+document.querySelectorAll('.nav-link').forEach((link) => {
+  link.addEventListener('click', function () {
+    document.querySelectorAll('.nav-link').forEach((l) => l.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
