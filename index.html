@@ -19,6 +19,7 @@
         <a href="#hero" class="nav-link active">Home</a>
         <a href="#case-converter" class="nav-link">Case Converter</a>
         <a href="#word-counter" class="nav-link">Word Counter</a>
+        <a href="#reading-time" class="nav-link">Reading Time</a>
         <a href="#features" class="nav-link">Features</a>
         <a href="#about" class="nav-link">About</a>
       </nav>
@@ -36,6 +37,7 @@
       <div class="hero-actions">
         <a href="#case-converter" class="btn btn-hero">Case Converter ↓</a>
         <a href="#word-counter" class="btn btn-hero btn-hero-outline">Word Counter ↓</a>
+        <a href="#reading-time" class="btn btn-hero btn-hero-outline">Reading Time ↓</a>
       </div>
     </div>
   </section>
@@ -138,6 +140,50 @@
           <div id="wcStatusMessage" class="status-message" aria-live="polite"></div>
         </div>
 
+        <!-- Tool Card 3: Reading Time Calculator -->
+        <div id="reading-time" class="tool-card">
+          <div class="tool-card-header">
+            <span class="tool-badge tool-badge-purple">Tool #3</span>
+            <h2 class="tool-title">Reading Time Calculator</h2>
+            <p class="tool-subtitle">Estimate reading and speaking time based on standard 200 WPM reading and 130 WPM speaking rates.</p>
+          </div>
+
+          <!-- Stats Dashboard Grid -->
+          <div class="stat-grid rt-stat-grid">
+            <div class="stat-card">
+              <span id="rtWordCount" class="stat-number">0</span>
+              <span class="stat-label">Word Count</span>
+            </div>
+            <div class="stat-card">
+              <span id="rtReadingTime" class="stat-number">0 min</span>
+              <span class="stat-label">Reading Time (200 WPM)</span>
+            </div>
+            <div class="stat-card">
+              <span id="rtSpeakingTime" class="stat-number">0 min</span>
+              <span class="stat-label">Speaking Time (130 WPM)</span>
+            </div>
+          </div>
+
+          <!-- Textarea Input Area -->
+          <div class="textarea-wrapper">
+            <textarea 
+              id="rtInput" 
+              placeholder="Type or paste your speech, essay, or article here to calculate reading and speaking time..." 
+              rows="10"
+              spellcheck="true"
+            ></textarea>
+          </div>
+
+          <!-- Reading Time Action Buttons -->
+          <div class="button-group word-counter-buttons">
+            <button id="btnRtCopy" class="btn btn-primary">Copy Text</button>
+            <button id="btnRtClear" class="btn btn-danger">Clear</button>
+          </div>
+
+          <!-- Feedback Status Notification -->
+          <div id="rtStatusMessage" class="status-message" aria-live="polite"></div>
+        </div>
+
       </div>
     </section>
 
@@ -180,6 +226,7 @@
           <div class="tool-tags">
             <span class="tool-pill active">✓ Text Case Converter</span>
             <span class="tool-pill active">✓ Word &amp; Character Counter</span>
+            <span class="tool-pill active">✓ Reading Time Calculator</span>
             <span class="tool-pill">⏳ Markdown Previewer</span>
             <span class="tool-pill">⏳ Line Sorter</span>
           </div>

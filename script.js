@@ -263,6 +263,105 @@ updateWordCounter();
 
 
 // ==========================================================================
+// Tool 3: Reading Time Calculator
+// ==========================================================================
+
+// Reading Time DOM Elements
+const rtInput = document.getElementById('rtInput');
+const rtWordCount = document.getElementById('rtWordCount');
+const rtReadingTime = document.getElementById('rtReadingTime');
+const rtSpeakingTime = document.getElementById('rtSpeakingTime');
+const btnRtCopy = document.getElementById('btnRtCopy');
+const btnRtClear = document.getElementById('btnRtClear');
+const rtStatusMessage = document.getElementById('rtStatusMessage');
+
+// Speed constants
+const READING_WPM = 200;
+const SPEAKING_WPM = 130;
+
+let rtStatusTimeout = null;
+
+// Show status message for Reading Time Calculator
+function showRtMessage(msg, type = 'info') {
+  if (rtStatusTimeout) {
+    clearTimeout(rtStatusTimeout);
+  }
+
+  rtStatusMessage.textContent = msg;
+  rtStatusMessage.className = `status-message show ${type}`;
+
+  rtStatusTimeout = setTimeout(() => {
+    rtStatusMessage.className = 'status-message';
+  }, 2200);
+}
+
+// Calculate and update Reading Time metrics
+function updateReadingTime() {
+  const text = rtInput.value;
+  const trimmed = text.trim();
+
+  // Word count: handles multiple spaces, line breaks, empty text, punctuation
+  const words = trimmed ? trimmed.split(/\s+/).length : 0;
+  rtWordCount.textContent = words;
+
+  // For empty text: show 0 min for both
+  if (words === 0) {
+    rtReadingTime.textContent = '0 min';
+    rtSpeakingTime.textContent = '0 min';
+    return;
+  }
+
+  // Calculate estimated minutes based on average speeds
+  const readingMins = Math.ceil(words / READING_WPM);
+  const speakingMins = Math.ceil(words / SPEAKING_WPM);
+
+  rtReadingTime.textContent = `${readingMins} min`;
+  rtSpeakingTime.textContent = `${speakingMins} min`;
+}
+
+// Clear Reading Time textarea and reset all results
+function clearReadingTime() {
+  if (!rtInput.value) return;
+  rtInput.value = '';
+  updateReadingTime();
+  rtInput.focus();
+  showRtMessage('Text cleared', 'info');
+}
+
+// Copy Reading Time text to clipboard
+async function copyReadingTime() {
+  const text = rtInput.value;
+
+  if (!text) {
+    showRtMessage('Nothing to copy!', 'info');
+    return;
+  }
+
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+    } else {
+      rtInput.select();
+      document.execCommand('copy');
+    }
+    showRtMessage('Copied to clipboard!', 'success');
+  } catch (err) {
+    rtInput.select();
+    document.execCommand('copy');
+    showRtMessage('Copied to clipboard!', 'success');
+  }
+}
+
+// Event Listeners for Reading Time Calculator
+rtInput.addEventListener('input', updateReadingTime);
+btnRtClear.addEventListener('click', clearReadingTime);
+btnRtCopy.addEventListener('click', copyReadingTime);
+
+// Initial count update for Reading Time Calculator
+updateReadingTime();
+
+
+// ==========================================================================
 // General UI Navigation
 // ==========================================================================
 

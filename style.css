@@ -271,6 +271,12 @@ body {
   border-color: #bfdbfe;
 }
 
+.tool-badge-purple {
+  color: #7c3aed;
+  background-color: #f5f3ff;
+  border-color: #ddd6fe;
+}
+
 .tool-title {
   font-size: 1.5rem;
   font-weight: 700;
@@ -285,12 +291,16 @@ body {
 }
 
 /* ==========================================================================
-   Stat Dashboard Grid (Word Counter)
+   Stat Dashboard Grid (Word Counter & Reading Time)
    ========================================================================== */
 .stat-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
   gap: 12px;
+}
+
+.rt-stat-grid {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
 }
 
 .stat-card {
@@ -678,6 +688,10 @@ textarea::placeholder {
 
   .stat-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .rt-stat-grid {
+    grid-template-columns: 1fr;
   }
 
   .button-group {
