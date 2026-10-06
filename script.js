@@ -1,3 +1,7 @@
+// ==========================================================================
+// Tool 1: Text Case Converter
+// ==========================================================================
+
 // DOM Elements
 const textInput = document.getElementById('textInput');
 const charCount = document.getElementById('charCount');
@@ -129,7 +133,7 @@ function clearText() {
   showMessage('Text cleared', 'info');
 }
 
-// --- Event Listeners ---
+// --- Event Listeners for Case Converter ---
 
 // Update counts on user input
 textInput.addEventListener('input', updateCounts);
@@ -143,10 +147,126 @@ btnReverse.addEventListener('click', reverseText);
 btnCopy.addEventListener('click', copyToClipboard);
 btnClear.addEventListener('click', clearText);
 
-// Initial count update
+// Initial count update for Case Converter
 updateCounts();
 
-// Navigation link active state update
+
+// ==========================================================================
+// Tool 2: Word & Character Counter
+// ==========================================================================
+
+// Word Counter DOM Elements
+const wcInput = document.getElementById('wcInput');
+const wcWords = document.getElementById('wcWords');
+const wcChars = document.getElementById('wcChars');
+const wcCharsNoSpaces = document.getElementById('wcCharsNoSpaces');
+const wcSentences = document.getElementById('wcSentences');
+const wcParagraphs = document.getElementById('wcParagraphs');
+const btnWcCopy = document.getElementById('btnWcCopy');
+const btnWcClear = document.getElementById('btnWcClear');
+const wcStatusMessage = document.getElementById('wcStatusMessage');
+
+let wcStatusTimeout = null;
+
+// Show status message for Word Counter
+function showWcMessage(msg, type = 'info') {
+  if (wcStatusTimeout) {
+    clearTimeout(wcStatusTimeout);
+  }
+
+  wcStatusMessage.textContent = msg;
+  wcStatusMessage.className = `status-message show ${type}`;
+
+  wcStatusTimeout = setTimeout(() => {
+    wcStatusMessage.className = 'status-message';
+  }, 2200);
+}
+
+// Calculate and update all counts in real-time
+function updateWordCounter() {
+  const text = wcInput.value;
+  const trimmed = text.trim();
+
+  // 1. Total Characters (including spaces and newlines)
+  wcChars.textContent = text.length;
+
+  // 2. Characters without spaces (ignores spaces, tabs, and newlines)
+  wcCharsNoSpaces.textContent = text.replace(/\s/g, '').length;
+
+  // 3. Word Count (consecutive clusters of non-whitespace characters)
+  const words = trimmed ? trimmed.split(/\s+/).length : 0;
+  wcWords.textContent = words;
+
+  // 4. Sentence Count (sentences ending with . ! ? or standalone clauses)
+  if (!trimmed) {
+    wcSentences.textContent = '0';
+  } else {
+    const sentences = trimmed
+      .split(/[.!?]+/)
+      .map((s) => s.trim())
+      .filter((s) => s.length > 0);
+    wcSentences.textContent = sentences.length;
+  }
+
+  // 5. Paragraph Count (paragraphs separated by line breaks)
+  if (!trimmed) {
+    wcParagraphs.textContent = '0';
+  } else {
+    const paragraphs = text
+      .split(/\r?\n+/)
+      .map((p) => p.trim())
+      .filter((p) => p.length > 0);
+    wcParagraphs.textContent = paragraphs.length;
+  }
+}
+
+// Clear Word Counter textarea and reset all counts to zero
+function clearWordCounter() {
+  if (!wcInput.value) return;
+  wcInput.value = '';
+  updateWordCounter();
+  wcInput.focus();
+  showWcMessage('Text cleared', 'info');
+}
+
+// Copy Word Counter text to clipboard
+async function copyWordCounter() {
+  const text = wcInput.value;
+
+  if (!text) {
+    showWcMessage('Nothing to copy!', 'info');
+    return;
+  }
+
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+    } else {
+      wcInput.select();
+      document.execCommand('copy');
+    }
+    showWcMessage('Copied to clipboard!', 'success');
+  } catch (err) {
+    wcInput.select();
+    document.execCommand('copy');
+    showWcMessage('Copied to clipboard!', 'success');
+  }
+}
+
+// Event Listeners for Word Counter
+wcInput.addEventListener('input', updateWordCounter);
+btnWcClear.addEventListener('click', clearWordCounter);
+btnWcCopy.addEventListener('click', copyWordCounter);
+
+// Initial count update for Word Counter
+updateWordCounter();
+
+
+// ==========================================================================
+// General UI Navigation
+// ==========================================================================
+
+// Navigation link active indicator
 document.querySelectorAll('.nav-link').forEach((link) => {
   link.addEventListener('click', function () {
     document.querySelectorAll('.nav-link').forEach((l) => l.classList.remove('active'));

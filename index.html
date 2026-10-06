@@ -17,7 +17,8 @@
       </a>
       <nav class="site-nav">
         <a href="#hero" class="nav-link active">Home</a>
-        <a href="#tools" class="nav-link">Tools</a>
+        <a href="#case-converter" class="nav-link">Case Converter</a>
+        <a href="#word-counter" class="nav-link">Word Counter</a>
         <a href="#features" class="nav-link">Features</a>
         <a href="#about" class="nav-link">About</a>
       </nav>
@@ -33,7 +34,8 @@
         Transform, convert, and format your text instantly in your browser. Fast, secure, and simple to use with no logins or setup required.
       </p>
       <div class="hero-actions">
-        <a href="#tools" class="btn btn-hero">Use Text Case Converter ↓</a>
+        <a href="#case-converter" class="btn btn-hero">Case Converter ↓</a>
+        <a href="#word-counter" class="btn btn-hero btn-hero-outline">Word Counter ↓</a>
       </div>
     </div>
   </section>
@@ -41,14 +43,14 @@
   <!-- Main Content Area -->
   <main class="main-content">
     
-    <!-- Prominent Tool Section -->
+    <!-- Tools Section -->
     <section id="tools" class="tool-section">
-      <div class="container">
+      <div class="container tools-container">
         
-        <!-- Tool Card -->
-        <div class="tool-card">
+        <!-- Tool Card 1: Text Case Converter -->
+        <div id="case-converter" class="tool-card">
           <div class="tool-card-header">
-            <span class="tool-badge">Featured Tool</span>
+            <span class="tool-badge">Tool #1</span>
             <h2 class="tool-title">Text Case Converter</h2>
             <p class="tool-subtitle">Convert your text to UPPERCASE, lowercase, Title Case, Sentence case, or Reverse order with one click.</p>
           </div>
@@ -57,7 +59,7 @@
           <div class="textarea-wrapper">
             <textarea 
               id="textInput" 
-              placeholder="Type or paste your text here..." 
+              placeholder="Type or paste your text here to convert case..." 
               rows="10"
               spellcheck="true"
             ></textarea>
@@ -84,6 +86,58 @@
           <div id="statusMessage" class="status-message" aria-live="polite"></div>
         </div>
 
+        <!-- Tool Card 2: Word Counter -->
+        <div id="word-counter" class="tool-card">
+          <div class="tool-card-header">
+            <span class="tool-badge tool-badge-blue">Tool #2</span>
+            <h2 class="tool-title">Word &amp; Character Counter</h2>
+            <p class="tool-subtitle">Analyze your text in real time with instant counts for words, characters, sentences, and paragraphs.</p>
+          </div>
+
+          <!-- Stats Dashboard Grid -->
+          <div class="stat-grid">
+            <div class="stat-card">
+              <span id="wcWords" class="stat-number">0</span>
+              <span class="stat-label">Words</span>
+            </div>
+            <div class="stat-card">
+              <span id="wcChars" class="stat-number">0</span>
+              <span class="stat-label">Characters</span>
+            </div>
+            <div class="stat-card">
+              <span id="wcCharsNoSpaces" class="stat-number">0</span>
+              <span class="stat-label">Without Spaces</span>
+            </div>
+            <div class="stat-card">
+              <span id="wcSentences" class="stat-number">0</span>
+              <span class="stat-label">Sentences</span>
+            </div>
+            <div class="stat-card">
+              <span id="wcParagraphs" class="stat-number">0</span>
+              <span class="stat-label">Paragraphs</span>
+            </div>
+          </div>
+
+          <!-- Textarea Input Area -->
+          <div class="textarea-wrapper">
+            <textarea 
+              id="wcInput" 
+              placeholder="Type or paste your text here to count words, characters, sentences, and paragraphs..." 
+              rows="10"
+              spellcheck="true"
+            ></textarea>
+          </div>
+
+          <!-- Word Counter Action Buttons -->
+          <div class="button-group word-counter-buttons">
+            <button id="btnWcCopy" class="btn btn-primary">Copy Text</button>
+            <button id="btnWcClear" class="btn btn-danger">Clear</button>
+          </div>
+
+          <!-- Feedback Status Notification -->
+          <div id="wcStatusMessage" class="status-message" aria-live="polite"></div>
+        </div>
+
       </div>
     </section>
 
@@ -99,7 +153,7 @@
           <div class="feature-card">
             <div class="feature-icon">⚡</div>
             <h3>Instant Processing</h3>
-            <p>Conversions happen instantly as you click. No waiting for page reloads or remote servers.</p>
+            <p>Conversions and calculations happen instantly as you type. No waiting for page reloads or remote servers.</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">🔒</div>
@@ -125,7 +179,7 @@
           </div>
           <div class="tool-tags">
             <span class="tool-pill active">✓ Text Case Converter</span>
-            <span class="tool-pill">⏳ Word Frequency Counter</span>
+            <span class="tool-pill active">✓ Word &amp; Character Counter</span>
             <span class="tool-pill">⏳ Markdown Previewer</span>
             <span class="tool-pill">⏳ Line Sorter</span>
           </div>
