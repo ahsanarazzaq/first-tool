@@ -15,7 +15,21 @@
         <span class="logo-icon">⚡</span>
         <span class="logo-text">First<span class="logo-accent">Tool</span></span>
       </a>
-      <nav class="site-nav">
+      <!-- Mobile Menu Toggle Button -->
+      <button 
+        type="button" 
+        id="navToggle" 
+        class="nav-toggle" 
+        aria-label="Toggle navigation menu" 
+        aria-expanded="false" 
+        aria-controls="siteNav"
+      >
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+      </button>
+
+      <nav id="siteNav" class="site-nav" aria-label="Main navigation">
         <a href="#hero" class="nav-link active">Home</a>
         <a href="#case-converter" class="nav-link">Case Converter</a>
         <a href="#word-counter" class="nav-link">Word Counter</a>
@@ -156,11 +170,11 @@
             </div>
             <div class="stat-card">
               <span id="rtReadingTime" class="stat-number">0 min</span>
-              <span class="stat-label">Reading Time (200 WPM)</span>
+              <span class="stat-label">Reading Time <span class="stat-sublabel">(200 WPM)</span></span>
             </div>
             <div class="stat-card">
               <span id="rtSpeakingTime" class="stat-number">0 min</span>
-              <span class="stat-label">Speaking Time (130 WPM)</span>
+              <span class="stat-label">Speaking Time <span class="stat-sublabel">(130 WPM)</span></span>
             </div>
           </div>
 

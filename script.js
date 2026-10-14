@@ -362,13 +362,49 @@ updateReadingTime();
 
 
 // ==========================================================================
-// General UI Navigation
+// General UI Navigation & Mobile Menu
 // ==========================================================================
 
-// Navigation link active indicator
+const navToggle = document.getElementById('navToggle');
+const siteNav = document.getElementById('siteNav');
+
+// Toggle mobile navigation drawer
+if (navToggle && siteNav) {
+  navToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+    navToggle.setAttribute('aria-expanded', String(!isExpanded));
+    siteNav.classList.toggle('is-open');
+  });
+
+  // Close mobile drawer when clicking outside
+  document.addEventListener('click', (e) => {
+    if (siteNav.classList.contains('is-open') && !siteNav.contains(e.target) && !navToggle.contains(e.target)) {
+      navToggle.setAttribute('aria-expanded', 'false');
+      siteNav.classList.remove('is-open');
+    }
+  });
+
+  // Close mobile drawer on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && siteNav.classList.contains('is-open')) {
+      navToggle.setAttribute('aria-expanded', 'false');
+      siteNav.classList.remove('is-open');
+      navToggle.focus();
+    }
+  });
+}
+
+// Navigation link active indicator and mobile menu auto-close
 document.querySelectorAll('.nav-link').forEach((link) => {
   link.addEventListener('click', function () {
     document.querySelectorAll('.nav-link').forEach((l) => l.classList.remove('active'));
     this.classList.add('active');
+
+    // Close mobile drawer upon clicking any link
+    if (navToggle && siteNav && siteNav.classList.contains('is-open')) {
+      navToggle.setAttribute('aria-expanded', 'false');
+      siteNav.classList.remove('is-open');
+    }
   });
 });
